@@ -1,8 +1,11 @@
 # Todo List  Backend Graphql Server
-
+This is a backend GraphQL server for simple todo list app consisting of List and Task models. NodeJS, Apollo-Server and Jest are mainly used in this application.
 ## Getting Started
 ### 1. Clone the project 
-Clone the project from: 
+Clone the project from by running the following command:
+```
+git clone git@github.com:tinmaungzin/todo-list-node.git
+```
 
 Install npm dependencies:
 
