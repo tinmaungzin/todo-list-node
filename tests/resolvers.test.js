@@ -21,9 +21,6 @@ createIndividualTask(createTaskData[0],expectedCreateTasks[0])
 createIndividualTask(createTaskData[1],expectedCreateTasks[1])
 createIndividualTask(createTaskData[2],expectedCreateTasks[2])
 
-
-  
-
 test('updateTask mutation returns the expectedTask object', async () => {
   const graphQLClient = new GraphQLClient(config.url)
   const task = await graphQLClient.request(updateTask, updateTaskData)
