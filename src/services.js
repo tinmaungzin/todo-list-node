@@ -1,8 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-import { getList, getNewOrder, updateList } from './utils.js'
+import { getList, getNewOrder, getUpdatedOrder, updateList } from './utils.js'
 
 const prisma = new PrismaClient()
-
 
 export const getLists =async () => {
   const lists = await prisma.list.findMany({
@@ -20,13 +19,12 @@ export const createList =async (title, orderedTasksById) => {
       orderedTasksById
     }
   })
-  if(list) return list
+  return list
 }
-
 
 export const updateTaskOrder = async (listId, targetTaskId, newPosition) => {
   const list = await getList(listId)
-  const order = getNewOrder(list,targetTaskId,newPosition)
+  const order = getUpdatedOrder(list,targetTaskId,newPosition)
   const updatedList = await prisma.list.update({
     where: {
       id: listId
@@ -36,7 +34,7 @@ export const updateTaskOrder = async (listId, targetTaskId, newPosition) => {
       orderedTasksById: order
     }
   })
-  if(updatedList) return updatedList
+  return updatedList
 }
 
 export const createTask =async (title,listId) => {
@@ -47,9 +45,8 @@ export const createTask =async (title,listId) => {
     }
   })
   const list = await getList(listId)
-  const order = list.orderedTasksById
-  order.splice(0,0,task.id)
-  await updateList(listId, list.title, order)
+  const order = getNewOrder(list,task.id)
+  await updateList(listId, list.title, order) 
   return task
 }
 
@@ -63,5 +60,5 @@ export const updateTask =async (taskId, title, status) => {
       status
     }
   })
-  if(task) return task
+  return task
 }

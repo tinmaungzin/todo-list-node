@@ -21,13 +21,19 @@ export const updateList =async (listId, title, orderedTasksById) => {
       orderedTasksById
     }
   })
-  if(list) return list
+  return list
 }
 
-export const getNewOrder = (list, targetTaskId, newPosition) => {
+export const getUpdatedOrder = (list, targetTaskId, newPosition) => {
   const order = list.orderedTasksById
   const oldPosition = order.indexOf(targetTaskId)
   order.splice(oldPosition,1)
   order.splice(newPosition-1,0,targetTaskId)
+  return order
+}
+
+export const getNewOrder = (list,taskId) => {
+  const order = list.orderedTasksById
+  order.splice(0,0,taskId)
   return order
 }

@@ -1,4 +1,3 @@
-import { lists } from "../../db/mockdb.js";
 import { getLists,createList, createTask, updateTask, updateTaskOrder } from "../services.js";
 const resolvers = {
   Query: {
@@ -8,10 +7,6 @@ const resolvers = {
     createList: async (root, {title, orderedTasksById}) => {
       return await createList(title, orderedTasksById)
     },
-
-    // updateList: async (root, {listId, title, orderedTasks}) => {
-    //   return await updateList(listId, title, orderedTasks)
-    // },
 
     updateTaskOrder: async (root, {listId, targetTaskId, newPosition}) => {
       return await updateTaskOrder(listId, targetTaskId, newPosition)
